@@ -24,4 +24,4 @@ setInterval(function(){
   } catch (err) {
     console.log('Error occured:', err);
   }
-}, 60000);
+}, 120000);
