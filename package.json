@@ -22,5 +22,12 @@
     "simple-twitter": "^1.0.7",
     "twit": "^2.2.3",
     "twitter": "^1.2.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.4.5",
+    "rewire": "^2.5.1"
   }
 }
