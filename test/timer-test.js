@@ -4,6 +4,7 @@ let rewire    = require('rewire');
 let chai      = require('chai');
 let expect    = chai.expect;
 let keys      = require(__dirname + '/../config/config.js');
+console.log(keys);
 let t         = new Twit(keys);
 
 var server    = rewire(__dirname + '/../server.js');
