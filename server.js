@@ -30,7 +30,11 @@ function findMentionsStream() {
 function searchStream(searchString) {
   var stream = t.stream('statuses/filter', { track: searchString});
   stream.on('tweet', function(tweet) {
-    console.log(tweet);
+    console.log(tweet.user.name);
+    console.log(tweet.source);
+    console.log(tweet.created_at);
+    console.log(tweet.text);
+    console.log('**********');
   });
 }
 
