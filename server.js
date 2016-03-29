@@ -27,6 +27,39 @@ function findMentionsStream() {
   });
 }
 
+function searchStream(searchString) {
+  var stream = t.stream('statuses/filter', { track: searchString});
+  stream.on('tweet', function(tweet) {
+    console.log(tweet);
+  });
+}
+
+function getUserInfo() {
+  t.get('account/verify_credentials', function(err, data, response) {
+    if(err) {
+      return console.error(err);
+    }
+    console.log('HERE BE data', data);
+    console.log('HERE BE response', response);
+  });
+}
+
+function getLatestFeed() {
+  t.get('account/verify_credentials', function(err, data, response) {
+    if(err) {
+      return console.error(err);
+    }
+    var myScreenName = data.screen_name;
+    var myId = data.id_str;
+    console.log('myScreenName is ' + myScreenName);
+    console.log('myId is ' + myId);
+  });
+  t.get('statuses/user_timeline', { user_id: MyId }, function(err, data, response) {
+
+  })
+}
+
+
 console.log('about to make request');
 //try to get it posting
 // setInterval(function(){
@@ -42,7 +75,7 @@ console.log('about to make request');
 try {
   console.log('Request made to twitter');
   // saySomething();
-  findMentionsStream();
+  searchStream('beatles');
 } catch (err) {
   console.log('Error occured:', err);
 }
