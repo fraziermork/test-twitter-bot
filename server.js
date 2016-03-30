@@ -4,6 +4,7 @@ let Twit      = require('twit');
 let keys      = require(__dirname + '/config/config.js');
 var t         = new Twit(keys);
 var lib       = {};
+require('./lib')(t, lib);
 
 var StreamOpts = function(searchString, type, callback) {
   this.searchString = searchString;
@@ -24,14 +25,15 @@ StreamObj.prototype.addStreamOpts = function(searchString, type, callback) {
 };
 
 var searchOptsIn = new StreamObj;
-searchOptsIn.addStreamOpts('beatles', 'track', lib.showTweetProps);
-searchOptsIn.addStreamOpts('drumpf', 'track', lib.showTweetProps);
+
+console.log(lib.beatlesCallback);
+searchOptsIn.addStreamOpts('beatles', 'track', lib.beatlesCallback);
+searchOptsIn.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
 // searchOptsIn.addStreamOpts('beatles', 'track', function(){console.log('track beatles');});
 // searchOptsIn.addStreamOpts('drumpf', 'track', function(){console.log('track drumpf');});
 
 
 
-require('./lib')(t, lib);
 // var multiStream = require('./lib/multiStream')(t);
 
 console.log('about to make request');
