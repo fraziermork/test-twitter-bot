@@ -45,22 +45,22 @@ var tweetId = {};
 
   // reply to mentions
 
-//   var mentionReply = function (){
-//     for(var i =0; i < newMentions.length; i++){
-//       var currentMention = newMentions[i];
-//       var resTweet = 'Hi @';
-//       resTweet += currentMention.user;
-//       resTweet += 'Thanks for the mention';
-//
-//
-//
-//       console.log(resTweet);
-//     }
-//   };
-// };
+  var mentionReply = function (){
+    for(var i =0; i < newMentions.length; i++){
+      var currentMention = newMentions[i];
+      var resTweet = 'Hi @';
+      resTweet += currentMention.user;
+      resTweet += 'Thanks for the mention';
+
+
+
+      console.log(resTweet);
+    }
+  };
+};
 //post media that is chunked to given response
-var filePath = 'https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg';
-var content = fs.readFileSync(filePath, {encoding: 'base64'});
-t.postMediaChunked({file_path: filePath}, function(err, data, res){
-  console.log(data);
-});
+// var filePath = 'https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg';
+// var content = fs.readFileSync(filePath, {encoding: 'base64'});
+// t.postMediaChunked({file_path: filePath}, function(err, data, res){
+//   console.log(data);
+// });
