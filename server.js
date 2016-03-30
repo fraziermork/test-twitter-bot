@@ -18,10 +18,11 @@ StreamOpts.addStreamOpts = function(searchString, type, callback) {
   this.optsArray.push(new StreamOpts(searchString, type, callback));
 };
 
-StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-StreamOpts.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
-StreamOpts.addStreamOpts('javascript', 'track', lib.javascriptCallback);
-StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
+// StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
+StreamOpts.addStreamOpts('beatles,dylan', 'track', lib.beatlesCallback);
+// StreamOpts.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
+StreamOpts.addStreamOpts('javascript,python', 'track', lib.javascriptCallback);
+// StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
 
 
 console.log('about to make request');
