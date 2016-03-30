@@ -30,8 +30,5 @@ StreamOpts.addStreamOpts = function(searchString, type, callback) {
   this.optsArray.push(new StreamOpts(searchString, type, callback));
 };
 
-// StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-StreamOpts.addStreamOpts('#javascript', lib.javascriptCallback);
-// StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
 
 require('./test/stream-test-inf')(t, lib, StreamOpts);
