@@ -15,13 +15,13 @@ function saySomething (){
 }
 
 
-console.log('about to make request');
-//try to get it posting 
-setInterval(function(){
-  try {
-    console.log('Request made to twitter');
-    saySomething();
-  } catch (err) {
-    console.log('Error occured:', err);
-  }
-}, 120000);
+// console.log('about to make request');
+// //try to get it posting
+// setInterval(function(){
+//   try {
+//     console.log('Request made to twitter');
+//     saySomething();
+//   } catch (err) {
+//     console.log('Error occured:', err);
+//   }
+// }, 120000);
