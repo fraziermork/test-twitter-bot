@@ -7,7 +7,9 @@ var lib       = {};
 require('./lib')(t, lib);
 
 var StreamOpts = function(searchString, type, callback) {
-  this.searchString = searchString;
+
+  this.searchString = searchString.replace(/\,\ +/, ',', 'g');
+  console.log(this.searchString);
   this.type = type;
   this.callback = callback;
 };
@@ -19,9 +21,9 @@ StreamOpts.addStreamOpts = function(searchString, type, callback) {
 };
 
 // StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-StreamOpts.addStreamOpts('beatles,dylan', 'track', lib.beatlesCallback);
+StreamOpts.addStreamOpts('beatles,  dylan', 'track', lib.beatlesCallback);
 // StreamOpts.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
-StreamOpts.addStreamOpts('javascript,python', 'track', lib.javascriptCallback);
+StreamOpts.addStreamOpts('javascript, python', 'track', lib.javascriptCallback);
 // StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
 
 
