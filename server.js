@@ -5,97 +5,40 @@ let keys      = require(__dirname + '/config/config.js');
 var t         = new Twit(keys);
 var lib       = {};
 
+var StreamOpts = function(searchString, type, callback) {
+  this.searchString = searchString;
+  this.type = type;
+  this.callback = callback;
+};
+
+var StreamObj = function () {
+  this.optsArray = [];
+};
+
+StreamObj.prototype.addStreamOptsObj = function(newOptsObj) {
+  this.optsArray.push(newOptsObj);
+};
+
+StreamObj.prototype.addStreamOpts = function(searchString, type, callback) {
+  this.addStreamOptsObj(new StreamOpts(searchString, type, callback));
+};
+
+var searchOptsIn = new StreamObj;
+searchOptsIn.addStreamOpts('beatles', 'track', lib.showTweetProps);
+searchOptsIn.addStreamOpts('drumpf', 'track', lib.showTweetProps);
+// searchOptsIn.addStreamOpts('beatles', 'track', function(){console.log('track beatles');});
+// searchOptsIn.addStreamOpts('drumpf', 'track', function(){console.log('track drumpf');});
+
+
+
 require('./lib')(t, lib);
-
-// function saySomething (){
-//   let today = new Date();
-//   t.post('statuses/update', {status: 'It is ' + today.toISOString()}, (err, data, response) => {
-//     console.log('Err is', err);
-//     console.log('response is ', response);
-//     console.log('data is ', data);
-//   });
-// }
-//
-// function findMentions() {
-//   t.get('statuses/mentions_timeline', { }, function(err, data, response) {
-//     console.log(data);
-//   });
-// }
-//
-// function findMentionsStream() {
-//   var stream = t.stream('statuses/filter', { track: 'doceydraxton'});
-//   stream.on('tweet', function(tweet) {
-//     console.log(tweet);
-//   });
-// }
-//
-// function searchStream(searchString, callback) {
-//   var stream = t.stream('statuses/filter', { track: searchString });
-//   stream.on('tweet', function(tweet) {
-//     console.log(tweet.user.name);
-//     console.log(tweet.source);
-//     console.log(tweet.created_at);
-//     console.log(tweet.text);
-//     console.log('coords: ' + tweet.coordinates);
-//     console.log('mentions:');
-//     tweet.entities.user_mentions.forEach((cur) => {
-//       console.log('@' + cur.screen_name + ' ' + cur.name);
-//     });
-//     console.log('hashtags:');
-//     tweet.entities.hashtags.forEach((cur) => {
-//       console.log(cur.text);
-//     });
-//     // console.log('retweeted: ' + tweet.retweet_count);
-//     // console.log('favorites: '+ tweet.favorite_count);
-//     console.log('**********');
-//   });
-// }
-//
-//
-//
-//
-// function getUserInfo() {
-//   t.get('account/verify_credentials', function(err, data, response) {
-//     if(err) {
-//       return console.error(err);
-//     }
-//     console.log('HERE BE data', data);
-//     console.log('HERE BE response', response);
-//   });
-// }
-//
-// function getLatestFeed() {
-//   t.get('account/verify_credentials', function(err, data, response) {
-//     if(err) {
-//       return console.error(err);
-//     }
-//     var myScreenName = data.screen_name;
-//     var myId = data.id_str;
-//     console.log('myScreenName is ' + myScreenName);
-//     console.log('myId is ' + myId);
-//   });
-//   t.get('statuses/user_timeline', { user_id: MyId }, function(err, data, response) {
-//
-//   })
-// }
-
+// var multiStream = require('./lib/multiStream')(t);
 
 console.log('about to make request');
-//try to get it posting
-// setInterval(function(){
-//   try {
-//     console.log('Request made to twitter');
-//     // saySomething();
-//     findMentionsStream();
-//   } catch (err) {
-//     console.log('Error occured:', err);
-//   }
-// }, 30000);
-
 try {
   console.log('Request made to twitter');
-  // saySomething();
-  lib.searchStream('beatles');
+  // lib.searchStream('beatles');
+  lib.multiStream(searchOptsIn);
 } catch (err) {
   console.log('Error occured:', err);
 }
