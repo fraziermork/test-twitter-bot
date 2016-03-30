@@ -37,6 +37,7 @@ searchOptsIn.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
 // var multiStream = require('./lib/multiStream')(t);
 
 console.log('about to make request');
+
 try {
   console.log('Request made to twitter');
   // lib.searchStream('beatles');
