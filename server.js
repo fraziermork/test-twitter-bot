@@ -6,11 +6,21 @@ var t         = new Twit(keys);
 var lib       = {};
 require('./lib')(t, lib);
 
-var StreamOpts = function(searchString, type, callback) {
+var StreamOpts = function(searchString, callback) {
+  if(searchString.indexOf(',') >= 0 || searchString.indexOf(' ') >= 0) {
+    this.searchString = searchString.replace(/\,\ +/, ',', 'g');
+    this.type = 'text';
+  } else {
+    if (searchString.charAt(0) === '@') {
+      this.searchString = searchString;
+      this.type = 'mention';
+    } else if (searchString.charAt(0) === '#') {
+      this.searchString = searchString;
+      this.type = 'hashtag';
+    }
+  }
 
-  this.searchString = searchString.replace(/\,\ +/, ',', 'g');
   console.log(this.searchString);
-  this.type = type;
   this.callback = callback;
 };
 
@@ -21,9 +31,9 @@ StreamOpts.addStreamOpts = function(searchString, type, callback) {
 };
 
 // StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-StreamOpts.addStreamOpts('beatles,  dylan', 'track', lib.beatlesCallback);
+StreamOpts.addStreamOpts('@voxdotcom', lib.beatlesCallback);
 // StreamOpts.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
-StreamOpts.addStreamOpts('javascript, python', 'track', lib.javascriptCallback);
+StreamOpts.addStreamOpts('#javascript', lib.javascriptCallback);
 // StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
 
 
