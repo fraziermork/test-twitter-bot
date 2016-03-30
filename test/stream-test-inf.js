@@ -2,9 +2,8 @@
 
 module.exports = (t, lib, StreamOpts) => {
 
-  // StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-  StreamOpts.addStreamOpts('#javascript', lib.javascriptCallback);
-  // StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
+  StreamOpts.addStreamOpts('beatles', lib.beatlesCallback);
+  // StreamOpts.addStreamOpts('#javascript', lib.javascriptCallback);
 
   console.log('about to make request');
   try {
@@ -17,6 +16,7 @@ module.exports = (t, lib, StreamOpts) => {
   setTimeout(function() {
     StreamOpts.addStreamOpts('@voxdotcom', lib.beatlesCallback);
     // StreamOpts.addStreamOpts('drumpf', lib.drumpfCallback);
+    StreamOpts.addStreamOpts('python', lib.pythonCallback);
 
     console.log('about to make request');
     try {
@@ -25,6 +25,6 @@ module.exports = (t, lib, StreamOpts) => {
     } catch (err) {
       console.log('Error occured:', err);
     }
-  }, 60000);
+  }, 30000);
 
 };

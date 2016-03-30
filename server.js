@@ -17,6 +17,9 @@ var StreamOpts = function(searchString, callback) {
     } else if (searchString.charAt(0) === '#') {
       this.searchString = searchString;
       this.type = 'hashtag';
+    } else {
+      this.searchString = searchString;
+      this.type = 'text';
     }
   }
 
