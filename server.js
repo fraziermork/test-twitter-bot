@@ -31,16 +31,7 @@ StreamOpts.addStreamOpts = function(searchString, type, callback) {
 };
 
 // StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-StreamOpts.addStreamOpts('@voxdotcom', lib.beatlesCallback);
-// StreamOpts.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
 StreamOpts.addStreamOpts('#javascript', lib.javascriptCallback);
 // StreamOpts.addStreamOpts('python', 'track', lib.pythonCallback);
 
-
-console.log('about to make request');
-try {
-  console.log('Request made to twitter');
-  lib.multiStream(StreamOpts);
-} catch (err) {
-  console.log('Error occured:', err);
-}
+require('./test/stream-test-inf')(t, lib, StreamOpts);
