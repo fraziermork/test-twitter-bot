@@ -12,36 +12,20 @@ var StreamOpts = function(searchString, type, callback) {
   this.callback = callback;
 };
 
-var StreamObj = function () {
-  this.optsArray = [];
+StreamOpts.optsArray = [];
+
+StreamOpts.addStreamOpts = function(searchString, type, callback) {
+  this.optsArray.push(new StreamOpts(searchString, type, callback));
 };
 
-StreamObj.prototype.addStreamOptsObj = function(newOptsObj) {
-  this.optsArray.push(newOptsObj);
-};
-
-StreamObj.prototype.addStreamOpts = function(searchString, type, callback) {
-  this.addStreamOptsObj(new StreamOpts(searchString, type, callback));
-};
-
-var searchOptsIn = new StreamObj;
-
-console.log(lib.beatlesCallback);
-searchOptsIn.addStreamOpts('beatles', 'track', lib.beatlesCallback);
-searchOptsIn.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
-// searchOptsIn.addStreamOpts('beatles', 'track', function(){console.log('track beatles');});
-// searchOptsIn.addStreamOpts('drumpf', 'track', function(){console.log('track drumpf');});
-
-
-
-// var multiStream = require('./lib/multiStream')(t);
+StreamOpts.addStreamOpts('beatles', 'track', lib.beatlesCallback);
+StreamOpts.addStreamOpts('drumpf', 'track', lib.drumpfCallback);
 
 console.log('about to make request');
-
 try {
   console.log('Request made to twitter');
   // lib.searchStream('beatles');
-  lib.multiStream(searchOptsIn);
+  lib.multiStream(StreamOpts);
 } catch (err) {
   console.log('Error occured:', err);
 }
