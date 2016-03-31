@@ -17,11 +17,17 @@ let t = new Twit(keys);
 
 
 //contructor
+// let RestOpts = function(tweetSearch, callback){
+//   this.tweetSearch.text =
+//   this.botName =
+//   console.log('TWEET SEARCH ' + tweetSearch);
+//
+// };
 
 
   function searchTweet (query){
     t.get('search/tweets', {q: searchQuery ,result_type: 'recent', lang: 'en', count: 10}, function(err, data, response){
-      // console.log('******* NEW ARRAY *******');
+      console.log('******* NEW ARRAY *******');
       tweets = data.statuses;
       for(var i = 0; i < tweets.length; i++) {
         var currentTweet = tweets[i];

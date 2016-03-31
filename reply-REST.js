@@ -25,6 +25,7 @@ textReply();
 
 function textReplyResId () {
   t.post('statuses/update', {status: newStatus, in_reply_to_status_id: replyId}, function(err, data, response){
+
     // console.log(data);
   });
 }
@@ -38,25 +39,25 @@ function mediaReply (){
   t.post('media/upload', {media_data: b64content}, function(err, data, response){
     var mediaId = data.media_id_string;
     console.log(data.media_id_string);
-    var params = {status: newStatus, media_ids: [mediaId]};
+    var params = {status: newStatus, in_reply_to_status_id: userStatus, media_ids: [mediaId]};
     console.log(data);
     t.post('statuses/update', params, function (err, data, response){
       console.log(data);
     });
   });
 }
-// mediaReply();
+mediaReply();
 
 //post Retweet
-function retweetReply(){
-t.post('statuses/retweet/:id', {id: retweetID}, function(err, data, response){
-  console.log(data);
-    // return data.split('').reverse().join('');
-
-
-});
-}
-retweetReply();
+// function retweetReply(){
+// t.post('statuses/retweet/:id', {id: retweetID}, function(err, data, response){
+//   console.log(data);
+//     // return data.split('').reverse().join('');
+//
+//
+// });
+// }
+// retweetReply();
 
 
 //removeRetweet
