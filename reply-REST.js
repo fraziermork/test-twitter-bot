@@ -6,12 +6,12 @@ let fs = require('fs');
 let keys = require(__dirname + '/config2.js');
 let t = new Twit(keys);
 
-//
-// let port = 3000;
-var newMentions = [];
-var tweetId = {};
-let newStatus = 'Welcome ';
+
+//post data  to fill in
+let newStatus = 'W ';
 let filePath = '///Users/lisabisa25/Desktop/bern.png';
+let retweetID = '715420889878147072';
+let replyId = '343360866131001345';
 
 
 
@@ -22,6 +22,14 @@ function textReply () {
   });
 }
 textReply();
+
+function textReplyResId () {
+  t.post('statuses/update', {status: newStatus, in_reply_to_status_id: replyId}, function(err, data, response){
+    // console.log(data);
+  });
+}
+// textReplyResId();
+
 
 
 //post media that is chunked to given response
@@ -37,4 +45,21 @@ function mediaReply (){
     });
   });
 }
-mediaReply();
+// mediaReply();
+
+//post Retweet
+function retweetReply(){
+t.post('statuses/retweet/:id', {id: retweetID}, function(err, data, response){
+  console.log(data);
+    // return data.split('').reverse().join('');
+
+
+});
+}
+retweetReply();
+
+
+//removeRetweet
+// function removeRetweet(){
+//   t.post('statuses/destroy/:id', {id: })
+// }
