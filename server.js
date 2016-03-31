@@ -7,4 +7,4 @@ var lib       = {};
 require('./lib')(t, lib);
 let StreamOpts = lib.StreamOpts;
 
-require('./test/stream-test-inf')(t, lib, StreamOpts);
+require('./bogus_test/stream-test-inf')(t, lib, StreamOpts);
