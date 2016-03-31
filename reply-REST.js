@@ -2,7 +2,7 @@
 
 
 let Twit = require('twit');
-// let Twitter = require('twitter');
+let fs = require('fs');
 let keys = require(__dirname + '/config2.js');
 let t = new Twit(keys);
 
@@ -10,57 +10,31 @@ let t = new Twit(keys);
 // let port = 3000;
 var newMentions = [];
 var tweetId = {};
-
-
-// var getTweetMentions = function() {
-//   t.get('statuses/mentions_timeline',{count: 10}, (err, data, response)=>{
-//     console.log('inside of get mentions');
-//     if(data.length){
-//       for(var i = 0; i < data.length; i++) {
-//         var currTweet = data[i];
-//         if(!tweetId[currTweet.id_str]){
-//           tweetId[currTweet.id_str] = true;
-//           var newObj = {};
-//           newObj.user = currTweet.user.screen_name;
-//           newObj.text = currTweet.text;
-//           newMentions.push(newObj);
-//         }
-//
-//       }
-      // mentionReply();
-      //
-      // console.log('DATA: ' + data);
-      // console.log('RES: ' + response);
-      // console.log('OBHJ: ' + newObj);
-      // console.log('TWEET ID: ' + tweetId);
-      // console.log('NEW MENT: ' + newMentions);
-      //
-  //
-  //   }
-  //
-  //
-  // });
-  // getTweetMentions();
-
-
-  // reply to mentions
-
-  var mentionReply = function (){
-    for(var i =0; i < newMentions.length; i++){
-      var currentMention = newMentions[i];
-      var resTweet = 'Hi @';
-      resTweet += currentMention.user;
-      resTweet += 'Thanks for the mention';
+let newStatus = 'Welcome ';
+let filePath = '///Users/lisabisa25/Desktop/bern.png';
 
 
 
-      console.log(resTweet);
-    }
-  };
-};
+//update status
+function textReply () {
+  t.post('statuses/update', {status: newStatus}, function(err, data, response){
+    console.log(data);
+  });
+}
+textReply();
+
+
 //post media that is chunked to given response
-// var filePath = 'https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg';
-// var content = fs.readFileSync(filePath, {encoding: 'base64'});
-// t.postMediaChunked({file_path: filePath}, function(err, data, res){
-//   console.log(data);
-// });
+function mediaReply (){
+  var b64content = fs.readFileSync(filePath, {encoding: 'base64'});
+  t.post('media/upload', {media_data: b64content}, function(err, data, response){
+    var mediaId = data.media_id_string;
+    console.log(data.media_id_string);
+    var params = {status: newStatus, media_ids: [mediaId]};
+    console.log(data);
+    t.post('statuses/update', params, function (err, data, response){
+      console.log(data);
+    });
+  });
+}
+mediaReply();
